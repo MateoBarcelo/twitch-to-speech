@@ -1,36 +1,8 @@
 import { useState } from "react"
 import Checkbox from "./Checkbox"
 
-export default function VolumeSlider() {
+export default function VolumeSlider({ handleMute, onChange, volumen }) {
 
-    const [volume, setVolume] = useState(window.localStorage.getItem('volume') || 50)
-    const [muted, setMuted] = useState(window.localStorage.getItem('muted') || false)
-
-    function handleChange(e) {
-        const newValue = e.target.valueAsNumber
-        window.localStorage.setItem('volume', newValue)
-        setVolume(newValue)
-
-    }
-
-    function handleMute(e) {
-        const isMuted = e.target.checked
-        setMuted(isMuted)
-        if (isMuted) {
-            setVolume(0)
-        } else {
-            setVolume(window.localStorage.getItem('volume') || 50)
-        }
-        window.localStorage.setItem('muted', isMuted)
-    }
-
-    function getVolume() {
-        return volume
-    }
-
-    function isMuted() {
-         return muted
-    }
 
     return(
         <div className="flex justify-center items-center space-x-2">
@@ -39,11 +11,10 @@ export default function VolumeSlider() {
             type="range" 
             min={0}
             max={100}
-            value={volume} 
-            onChange={handleChange}
+            value={volumen} 
+            onChange={onChange}
             className="w-full h-1 bg-[#24292c] rounded-lg appearance-none cursor-pointer" />
             <Checkbox onChange={handleMute}>Mute</Checkbox>
         </div>
-
     )
 }
