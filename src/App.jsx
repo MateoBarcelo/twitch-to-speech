@@ -68,6 +68,7 @@ function App() {
         if (!speechSynthesis.speaking) {
           clearInterval(r)
         } else {
+          speechSynthesis.pause()
           speechSynthesis.resume()
         }
       }, 14000)
