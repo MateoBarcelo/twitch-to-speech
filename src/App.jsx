@@ -57,11 +57,20 @@ function App() {
           sayUser ? `${tags.username} dice: ${message}` : message
         );
 
-        utterance.volume = muted ? 0.0 : volume;
+        utterance.volume = muted ? 0.0 : volume
         utterance.voice =
-          spanishVoices.find((voic) => voic.name === voice) || spanishVoices[0];
+          spanishVoices.find((voic) => voic.name === voice) || spanishVoices[0]
 
-        window.speechSynthesis.speak(utterance);
+        window.speechSynthesis.speak(utterance)
+
+        let r = setInterval(() => {
+        console.log(speechSynthesis.speaking)
+        if (!speechSynthesis.speaking) {
+          clearInterval(r)
+        } else {
+          speechSynthesis.resume()
+        }
+      }, 14000)
       };
 
       client.on('message', messageHandler);
