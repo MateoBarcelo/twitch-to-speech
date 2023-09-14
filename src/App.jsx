@@ -63,16 +63,18 @@ function App() {
 
         window.speechSynthesis.speak(utterance)
 
-        let r = setInterval(() => {
-        console.log(speechSynthesis.speaking)
-        if (!speechSynthesis.speaking) {
-          clearInterval(r)
-        } else {
-          speechSynthesis.pause()
-          speechSynthesis.resume()
+        if(voice.includes('Google')) {
+            let r = setInterval(() => {
+              if (!speechSynthesis.speaking) {
+                clearInterval(r)
+              } else {
+                speechSynthesis.pause()
+                speechSynthesis.resume()
+              }
+          }, 14000)
         }
-      }, 14000)
-      };
+
+      }
 
       client.on('message', messageHandler);
 
